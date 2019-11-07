@@ -8,7 +8,13 @@ state.__serve_handlers = (item) => {
     handlers.forEach(handler => handler(value))
 }
 
-state.get = (item) => inner_state[item]
+state.get = (item, fallback) => {
+    if (state.__data[item] === undefined) {
+        return fallback
+    }
+
+    return state.__data[item]
+}
 
 state.set = (item, value) => {
     state.__data[item] = value
